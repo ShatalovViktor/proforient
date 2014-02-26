@@ -17,27 +17,24 @@ include("admin/settings.php");
 
 
 	<script src="http://api-maps.yandex.ru/2.0/?load=package.full&lang=ru-RU" type="text/javascript"></script>
-	<script src="http://api-maps.yandex.ru/1.1/index.xml?key=AGybdlIBAAAADzcrAQQA5gedE7XoT9UWKazFFgQVQWF485cAAAAAAAAAAAD3euohBHdP7SVNBMlxPK205sLnrg=="	type="text/javascript"></script>
-	<script type="text/javascript"> 
+<script src="http://api-maps.yandex.ru/1.1/index.xml?key=AEFDDlMBAAAAx6kWPgIACpXH1O7FTH8eQpFL9P-wQQQyZaMAAAAAAAAAAACXEV8zrYWDiOU1IuWWPSGUA-2tkg=="
+        type="text/javascript"></script>
+	<script type="text/javascript">
         // Создание обработчика для события window.onLoad
-        YMaps.jQuery(function () {
-            // Создание экземпляра карты и его привязка к созданному контейнеру
-            var map = new YMaps.Map(YMaps.jQuery("#YMapsID")[0]);
- 
-            // Установка для карты ее центра и масштаба
-            map.setCenter(new YMaps.GeoPoint(34.999244,48.463564), 11);
- 
+        window.onload = function () {
+            var map = new YMaps.Map(document.getElementById("YMapsID"));
+            map.setCenter(new YMaps.GeoPoint(35.046181,48.464717), 11);
+
             // Добавление элементов управления
             map.enableScrollZoom();
             map.addControl(new YMaps.ToolBar());
             map.addControl(new YMaps.TypeControl());
             map.addControl(new YMaps.Zoom());
- 
- 
+
 // Группы объектов
             var groups = [
                 createGroup("Амур-Нижнеднепровский", [
-				
+
 <?php
 				$db = mysql_connect($db_server,$db_user,$db_pass) ;
 				mysql_select_db($db_name, $db);
@@ -49,12 +46,12 @@ include("admin/settings.php");
 					{
 					$descr='<br /><b>Директор:</b>'.$row[family_director].' '.$row[name_director].' '.$row[otch_director].'<br /><b>Телефон:</b>'.$row[telephone].'<br /><b>E-mail:</b>'
 					.$row[email].'<br /><b>Сайт школы:</b>'.$row[site].'<br /><b>Адрес школы:</b>'.$row[address].'<br/><a href=\"?school_id='.$row[id].'\"> Данные по школе </a>';
-					
-					
-					
+
+
+
 				?>
-        	createPlacemark(new YMaps.GeoPoint(<?php echo "$row[lon] , $row[lat]";?>), "<?php echo $row['number'];?>",   "<?php echo $descr;?>" ,"<?php echo $row['icon'];?>"),
-			<?php 
+        	createPlacemark(new YMaps.GeoPoint(<?php echo "$row[lon] , $row[lat]";?>), "<?php echo addslashes($row['number']);?>",   "<?php echo addslashes($descr);?>" ,"<?php echo $row['icon'];?>"),
+			<?php
 			 }
 			?>
                 ], "default#cinemaIcon"),
@@ -70,18 +67,18 @@ include("admin/settings.php");
 					{
 					$descr='<br /><b>Директор:</b>'.$row[family_director].' '.$row[name_director].' '.$row[otch_director].'<br /><b>Телефон:</b>'.$row[telephone].'<br /><b>E-mail:</b>'
 					.$row[email].'<br /><b>Сайт школы:</b>'.$row[site].'<br /><b>Адрес школы:</b>'.$row[address].'<br/><a href=\"?school_id='.$row[id].'\"> Данные по школе </a>';
-					
-					
-					
+
+
+
 				?>
-        	createPlacemark(new YMaps.GeoPoint(<?php echo "$row[lon] , $row[lat]";?>), "<?php echo $row['number'];?>",   "<?php echo $descr;?>" ,"<?php echo $row['icon'];?>"),
-			<?php 
+        	createPlacemark(new YMaps.GeoPoint(<?php echo "$row[lon] , $row[lat]";?>), "<?php echo addslashes($row['number']);?>",   "<?php echo addslashes($descr);?>" ,"<?php echo $row['icon'];?>"),
+			<?php
 			 }
 			?>
                 ], "default#teatherIcon"),
-				
-				
-				
+
+
+
                 createGroup("Жовтневый", [
 <?php
 				$db = mysql_connect($db_server,$db_user,$db_pass) ;
@@ -94,17 +91,17 @@ include("admin/settings.php");
 					{
 					$descr='<br /><b>Директор:</b>'.$row[family_director].' '.$row[name_director].' '.$row[otch_director].'<br /><b>Телефон:</b>'.$row[telephone].'<br /><b>E-mail:</b>'
 					.$row[email].'<br /><b>Сайт школы:</b>'.$row[site].'<br /><b>Адрес школы:</b>'.$row[address].'<br/><a href=\"?school_id='.$row[id].'\"> Данные по школе </a>';
-					
-					
-					
+
+
+
 				?>
-        	createPlacemark(new YMaps.GeoPoint(<?php echo "$row[lon] , $row[lat]";?>), "<?php echo $row['number'];?>",   "<?php echo $descr;?>" ,"<?php echo $row['icon'];?>"),
-			<?php 
+        	createPlacemark(new YMaps.GeoPoint(<?php echo "$row[lon] , $row[lat]";?>), "<?php echo addslashes($row['number']);?>",   "<?php echo addslashes($descr);?>" ,"<?php echo $row['icon'];?>"),
+			<?php
 			 }
 			?>
                 ], "default#campingIcon"),
-                createGroup("Индустриальный", [
-				<?php 
+               /* createGroup("Индустриальный", [
+				<?php
 				$db = mysql_connect($db_server,$db_user,$db_pass) ;
 				mysql_select_db($db_name, $db);
 				$rs = mysql_query("SET NAMES utf8");
@@ -115,17 +112,17 @@ include("admin/settings.php");
 					{
 					$descr='<br /><b>Директор:</b>'.$row[family_director].' '.$row[name_director].' '.$row[otch_director].'<br /><b>Телефон:</b>'.$row[telephone].'<br /><b>E-mail:</b>'
 					.$row[email].'<br /><b>Сайт школы:</b>'.$row[site].'<br /><b>Адрес школы:</b>'.$row[address].'<br/><a href=\"?school_id='.$row[id].'\"> Данные по школе </a>';
-					
-					
-					
+
+
+
 				?>
-        	createPlacemark(new YMaps.GeoPoint(<?php echo "$row[lon] , $row[lat]";?>), "<?php echo $row['number'];?>",   "<?php echo $descr;?>" ,"<?php echo $row['icon'];?>"),
-			<?php 
+        	createPlacemark(new YMaps.GeoPoint(<?php echo "$row[lon] , $row[lat]";?>), "<?php echo addslashes($row['number']);?>",   "<?php echo addslashes($descr);?>" ,"<?php echo $row['icon'];?>"),
+			<?php
 			 }
 			?>
                 ], "default#trainIcon"),
 				createGroup("Кировский", [
-				<?php 
+				<?php
 				$db = mysql_connect($db_server,$db_user,$db_pass) ;
 				mysql_select_db($db_name, $db);
 				$rs = mysql_query("SET NAMES utf8");
@@ -136,17 +133,14 @@ include("admin/settings.php");
 					{
 					$descr='<br /><b>Директор:</b>'.$row[family_director].' '.$row[name_director].' '.$row[otch_director].'<br /><b>Телефон:</b>'.$row[telephone].'<br /><b>E-mail:</b>'
 					.$row[email].'<br /><b>Сайт школы:</b>'.$row[site].'<br /><b>Адрес школы:</b>'.$row[address].'<br/><a href=\"?school_id='.$row[id].'\"> Данные по школе </a>';
-					
-					
-					
 				?>
-        	createPlacemark(new YMaps.GeoPoint(<?php echo "$row[lon] , $row[lat]";?>), "<?php echo $row['number'];?>",   "<?php echo $descr;?>" ,"<?php echo $row['icon'];?>"),
-			<?php 
+        	createPlacemark(new YMaps.GeoPoint(<?php echo "$row[lon] , $row[lat]";?>), "<?php echo addslashes($row['number']);?>",   "<?php echo addslashes($descr);?>" ,"<?php echo $row['icon'];?>"),
+			<?php
 			 }
 			?>
-                ], "default#trainIcon"),
+                ], "default#trainIcon"),*/
 				createGroup("Красногвардейский", [
-			<?php 
+			<?php
 				$db = mysql_connect($db_server,$db_user,$db_pass) ;
 				mysql_select_db($db_name, $db);
 				$rs = mysql_query("SET NAMES utf8");
@@ -157,17 +151,17 @@ include("admin/settings.php");
 					{
 					$descr='<br /><b>Директор:</b>'.$row[family_director].' '.$row[name_director].' '.$row[otch_director].'<br /><b>Телефон:</b>'.$row[telephone].'<br /><b>E-mail:</b>'
 					.$row[email].'<br /><b>Сайт школы:</b>'.$row[site].'<br /><b>Адрес школы:</b>'.$row[address].'<br/><a href=\"?school_id='.$row[id].'\"> Данные по школе </a>';
-					
-					
-					
+
+
+
 				?>
-        	createPlacemark(new YMaps.GeoPoint(<?php echo "$row[lon] , $row[lat]";?>), "<?php echo $row['number'];?>",   "<?php echo $descr;?>" ,"<?php echo $row['icon'];?>"),
-			<?php 
+        	createPlacemark(new YMaps.GeoPoint(<?php echo "$row[lon] , $row[lat]";?>), "<?php echo addslashes($row['number']);?>",   "<?php echo addslashes($descr);?>" ,"<?php echo $row['icon'];?>"),
+			<?php
 			 }
-			?>        
+			?>
                 ], "default#trainIcon"),
 				createGroup("Ленинский", [
-				<?php 
+				<?php
 				$db = mysql_connect($db_server,$db_user,$db_pass) ;
 				mysql_select_db($db_name, $db);
 				$rs = mysql_query("SET NAMES utf8");
@@ -178,18 +172,18 @@ include("admin/settings.php");
 					{
 					$descr='<br /><b>Директор:</b>'.$row[family_director].' '.$row[name_director].' '.$row[otch_director].'<br /><b>Телефон:</b>'.$row[telephone].'<br /><b>E-mail:</b>'
 					.$row[email].'<br /><b>Сайт школы:</b>'.$row[site].'<br /><b>Адрес школы:</b>'.$row[address].'<br/><a href=\"?school_id='.$row[id].'\"> Данные по школе </a>';
-					
-					
-					
+
+
+
 				?>
-        	createPlacemark(new YMaps.GeoPoint(<?php echo "$row[lon] , $row[lat]";?>), "<?php echo $row['number'];?>",   "<?php echo $descr;?>" ,"<?php echo $row['icon'];?>"),
-			<?php 
+        	createPlacemark(new YMaps.GeoPoint(<?php echo "$row[lon] , $row[lat]";?>), "<?php echo addslashes($row['number']);?>",   "<?php echo addslashes($descr);?>" ,"<?php echo $row['icon'];?>"),
+			<?php
 			 }
-			?>    
-      
+			?>
+
                 ], "default#trainIcon"),
 				createGroup("Самарский", [
-          	<?php 
+          	<?php
 				$db = mysql_connect($db_server,$db_user,$db_pass) ;
 				mysql_select_db($db_name, $db);
 				$rs = mysql_query("SET NAMES utf8");
@@ -200,17 +194,17 @@ include("admin/settings.php");
 					{
 					$descr='<br /><b>Директор:</b>'.$row[family_director].' '.$row[name_director].' '.$row[otch_director].'<br /><b>Телефон:</b>'.$row[telephone].'<br /><b>E-mail:</b>'
 					.$row[email].'<br /><b>Сайт школы:</b>'.$row[site].'<br /><b>Адрес школы:</b>'.$row[address].'<br/><a href=\"?school_id='.$row[id].'\"> Данные по школе </a>';
-					
-					
-					
+
+
+
 				?>
-        	createPlacemark(new YMaps.GeoPoint(<?php echo "$row[lon] , $row[lat]";?>), "<?php echo $row['number'];?>",   "<?php echo $descr;?>" ,"<?php echo $row['icon'];?>"),
-			<?php 
+        	createPlacemark(new YMaps.GeoPoint(<?php echo "$row[lon] , $row[lat]";?>), "<?php echo addslashes($row['number']);?>",   "<?php echo addslashes($descr);?>" ,"<?php echo $row['icon'];?>"),
+			<?php
 			 }
-			?>   
+			?>
                 ], "default#trainIcon"),
 				createGroup("Днепропетровский", [
-          <?php 
+          <?php
 				$db = mysql_connect($db_server,$db_user,$db_pass) ;
 				mysql_select_db($db_name, $db);
 				$rs = mysql_query("SET NAMES utf8");
@@ -221,31 +215,31 @@ include("admin/settings.php");
 					{
 					$descr='<br /><b>Директор:</b>'.$row[family_director].' '.$row[name_director].' '.$row[otch_director].'<br /><b>Телефон:</b>'.$row[telephone].'<br /><b>E-mail:</b>'
 					.$row[email].'<br /><b>Сайт школы:</b>'.$row[site].'<br /><b>Адрес школы:</b>'.$row[address].'<br/><a href=\"?school_id='.$row[id].'\"> Данные по школе </a>';
-					
-					
-					
+
+
+
 				?>
-        	createPlacemark(new YMaps.GeoPoint(<?php echo "$row[lon] , $row[lat]";?>), "<?php echo $row['number'];?>",   "<?php echo $descr;?>" ,"<?php echo $row['icon'];?>"),
-			<?php 
+        	createPlacemark(new YMaps.GeoPoint(<?php echo "$row[lon] , $row[lat]";?>), "<?php echo addslashes($row['number']);?>",   "<?php echo addslashes($descr);?>" ,"<?php echo $row['icon'];?>"),
+			<?php
 			 }
-			?>   
+			?>
                 ], "default#trainIcon")
             ];
- 
+
             // Создание списка групп
             for (var i = 0; i < groups.length; i++) {
                 addMenuItem(groups[i], map, YMaps.jQuery("#menu"));
             }
-        })
- 
+        }
+
         // Добавление одного пункта в список
         function addMenuItem (group, map, menuContainer) {
- 
+
             // Показать/скрыть группу на карте
             YMaps.jQuery("<a class=\"title\" href=\"#\">" + group.title + "</a>")
                 .bind("click", function () {
                     var link = YMaps.jQuery(this);
- 
+
                     // Если пункт меню "неактивный", то добавляем группу на карту,
                     // иначе - удаляем с карты
                     if (link.hasClass("active")) {
@@ -253,40 +247,40 @@ include("admin/settings.php");
                     } else {
                         map.addOverlay(group);
                     }
- 
+
                     // Меняем "активность" пункта меню
                     link.toggleClass("active");
- 
+
                     return false;
                 })
- 
+
                 // Добавление нового пункта меню в список
                 .appendTo(
                     YMaps.jQuery("<li></li>").appendTo(menuContainer)
                 )
-        };
- 
+        }
+
         // Создание группы
         function createGroup (title, objects, style) {
             var group = new YMaps.GeoObjectCollection(style);
- 
+
             group.title = title;
             group.add(objects);
- 
+
             return group;
-        };
- 
+        }
+
         // Создание метки
         function createPlacemark (point, name, description, st) {
             var placemark = new YMaps.Placemark(point, {style:st});
 			placemark.setIconContent(name);
             placemark.name = name;
             placemark.description = description;
- 
+
             return placemark
         }
-    </script> 
-	
+    </script>
+
 	
 </head>
 <body>
@@ -322,7 +316,7 @@ include("admin/settings.php");
     <div id="welcome">
 
 	<?php
-	if (isset($_GET['school_id'])) 
+	if (isset($_GET['school_id']))
 	{
 		$idSchool=$_GET['school_id'];
 		$qr_data = "SELECT * FROM data WHERE (data.id_school=".$idSchool.")";
@@ -387,7 +381,7 @@ include("admin/settings.php");
 	
 	}
 	else echo ' <div id="YMapsID" style="width:900px;height:400px"></div>';?>
-     
+
     </div>
     
   </div>
