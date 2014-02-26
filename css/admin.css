@@ -1,0 +1,627 @@
+
+#hide {
+    display:none;
+}
+.clear{
+    clear:both;
+}
+
+.confTitleA {
+    text-decoration:none;
+    color: #000;
+}
+
+#seo {
+    margin-bottom: 40px;
+    font-size:12px;
+}
+/*
+*  начало секции [ Форма авторизации ]
+*/
+.loginform {
+    font-size:12px;
+    margin: 200px auto;
+    display: block;
+    width: 305px;
+    height: 152px;
+}
+.loginhead {
+    margin: 0 auto;
+    text-indent:20px;
+    display:block;
+    width: 300px;
+    height: 27px;
+    color: #fff;
+    background: url(img_admin/head_form.jpg) #fff no-repeat center top;
+}
+
+.loginbody {
+    margin: 0 auto;
+    display: block;
+    width:305px;
+    height:125px;
+    background: url(img_admin/form_body.jpg) #fff center top;
+}
+
+.login_content {
+    display:block;
+    margin: 0px auto;
+    height:125px;
+    vertical-align: middle;
+    text-align: center;
+    padding-top: 25px;
+}
+
+.login_content label {
+   font-weight:bold; 
+}
+
+.login_content input[type="text"]{
+    background-color: #d8e4d0;
+    width: 150px;
+}
+
+.login_content input[type="password"]{
+    background-color: #d8e4d0;
+    width: 150px;
+}
+
+.login_content input[type="submit"] {
+     display: block;
+     float:right;
+     margin-right: 45px;
+     margin-top: 10px;
+     cursor: pointer;
+     text-align:center;
+     color: #fff;
+     width:88px;
+     background: url(img_admin/bckg_butt.jpg) #fff no-repeat center top;
+}
+
+.error {
+    display: block;
+    color:red;
+    margin-bottom: 20px;
+}
+/*
+*  конец секции [ Форма авторизации ]
+*/
+
+/*
+*  начало [ стили админки ]
+*/
+
+/*
+*  начало секции [ header ]
+*/
+.header {
+     margin: 0 auto;
+     display: block;
+     width: 100%;
+     background: url(img_admin/right_header.jpg) no-repeat top right;
+     color:#fff;
+}
+
+.left_header {
+    display: inline-block;
+    float:left;
+    height: 107px;
+    width:127px;
+    background: url(img_admin/left_header.jpg) no-repeat top left;
+}
+
+.right_header {
+    display: inline-block;
+    float:right;
+    height: 107px;
+    width:57px;
+    background: url(img_admin/right_header.jpg) no-repeat top right;
+}
+
+.body_header {
+    font-size: 13px;
+    display:block;
+    height:107px;
+    margin-left:127px;
+    background: url(img_admin/body_header.jpg) repeat-x top left;
+    vertical-align: middle;
+}
+
+.body_header .title {
+    margin-left:-82px;
+    padding-top:10px;
+    text-align: center;
+    font-weight:bold;
+    
+}
+
+
+.body_header .add_func {
+    font-size:12px;
+    float:right;
+    margin-top: -20px;
+
+}
+
+.body_header .add_func .button {
+    border: 1px solid #fff;
+    display: inline-block;
+    text-align: center;
+    height: 22px;
+    width:109px;
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    background: url(img_admin/button.jpg) no-repeat center center; 
+}
+
+.body_header .menu {
+    font-family: Tahoma;
+    display: block;
+    width:100%;
+}
+
+/*
+*  начало секции секции [ пункты меню ]
+*/
+.header .menu {
+    display: block;
+    margin-left: 0px;
+    margin-top:-40px;
+	padding-bottom:5px;
+    min-height:22px;
+	background-color: #3e5a2a;
+}
+
+.header .menu .butt_left{
+    display: inline-block;
+    height: 22px;
+    width: 9px;
+    background: url(./img_admin/butt_left.jpg) no-repeat;
+}
+
+.header .menu .butt_right{
+    display: inline-block;
+    height: 22px;
+    width: 9px;
+    background: url(./img_admin/butt_right.jpg) no-repeat;
+}
+
+.header .menu a {
+    font-family: Tahoma;
+    border: 1px solid #fff;
+    font-size:13px;
+    height:22px;
+    margin-left: 10px;
+	margin-top: 5px;
+    padding-left:5px;
+    padding-right:5px;
+    display: inline-block;
+    text-align: center;
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    background: url(./img_admin/butt_mind.jpg) repeat-x left top;
+}
+/*
+*  конец секции секции [ пункты меню ]
+*/
+
+
+
+/*
+*  конец секции [ header ]
+*/
+
+
+/*
+*  начало секции [ footer ]
+*/
+.footer {
+    display: block;
+    margin: 0 auto;
+    min-height:22px;
+    min-width:184px;
+    background: url(./img_admin/footer_bckg.jpg) no-repeat right bottom;
+}
+
+.footer .auth {
+    display:block;
+    float:right;
+    color: #fff;
+    font-weight:bold;
+    margin-right: 20px;
+    font-size: 12px;
+}
+/*
+*  конец секции [ footer ]
+*/
+
+/*
+*  начало секции [ content ]
+*/
+#content {
+    min-height: 620px;
+    min-width: 100%;
+}
+
+/*
+*  начало секции [ меню слева ]
+*/
+.left_bar {
+    margin-top:5px;
+    display: block;
+    width: 165px;
+    float:left;
+}
+
+.left_bar .body_menu {
+    text-align:left;
+    font-size: 16px;
+    padding-top: 10px;
+    text-indent: 10px;
+    font-weight:bold;
+    color: #fff;
+    display: block;
+    width: 160px;
+    background: url(./img_admin/left_menu_body.jpg) repeat-y left top;
+}
+
+.left_bar .body_menu a {
+    display: block;
+    font-size: 11px;
+    margin-left: 10px;;
+    margin-top: 0px;
+    text-align: left;
+    width:160px;
+    color: #fff;
+    text-indent:15px;
+    text-decoration: none;
+    font-weight: bold;
+    background: url(./img_admin/under_menu_bckg.jpg) no-repeat center left;
+}
+
+.left_bar .footer_menu {
+    width: 160px;
+    height: 17px;
+    background: url(./img_admin/left_menu_footer.jpg) no-repeat center bottom;
+}
+/*
+*  конец секции [ меню слева ]
+*/
+
+/*
+*  начало секции [ вывод новостей ]
+*/
+.right_bar {
+    display:block;
+    float:left;
+    width:75%;
+	min-height: 600px;
+}
+
+.news {
+    width: 100%;
+    height: auto;
+    float:left;
+    vertical-align:middle;
+}
+
+.news .linq {
+    padding-left:40px;
+    font-size:12px;
+}
+.news .title_line {
+    height:19px;;
+    font-family: Tahoma;
+    font-size: 12px;
+    margin: 2px;
+    margin-top: 20px;
+    display: block;
+    color: #000;
+    font-weight: bold;
+    text-indent:10px;;
+    text-decoration:none;
+    background-color: #b0cb9e;
+}
+
+.news .clear {
+    width: 100%;
+    clear:both;
+}
+.news .conf_mess {
+    margin-top:-30px;
+    display: inline-block;
+    border: 0 solid #fff;
+    float:right;
+    width:40px;
+    height: 45px;
+    background: url(./img_admin/conf.jpg) #fff no-repeat left center;
+}
+
+.news .conf_mess:hover {
+    width:45px;
+    background: url(./img_admin/conf_select.jpg) #fff no-repeat left center;
+}
+.news .vip_on {
+    margin-top:-30px;
+    display: inline-block;
+    border: 0 solid #fff;
+    float:right;
+    width:40px;
+    height: 45px;
+    background: url(./img_admin/vip_on.jpg) #fff no-repeat left center;
+}
+
+.news .vip_off {
+    margin-top:-30px;
+    display: inline-block;
+    border: 0 solid #fff;
+    float:right;
+    width:40px;
+    height: 45px;
+    background: url(./img_admin/vip_off.jpg) #fff no-repeat left center;
+}
+
+.news .display_on {
+    margin-top:-30px;
+    display: inline-block;
+    border: 0 solid #fff;
+    float:right;
+    width:40px;
+    height: 45px;
+    background: url(./img_admin/display_on.jpg) #fff no-repeat left center;
+}
+
+.news .display_off {
+    margin-top:-30px;
+    display: inline-block;
+    border: 0 solid #fff;
+    float:right;
+    width:40px;
+    height: 45px;
+    background: url(./img_admin/display_off.jpg) #fff no-repeat left center;
+}
+
+.news .remove {
+    margin-top:-30px;
+    display: inline-block;
+    border: 0 solid #fff;
+    float:right;
+    width:45px;
+    height: 45px;
+    background: url(./img_admin/remove.jpg) #fff no-repeat left center;
+}
+
+.news .up {
+    margin-top:-25px;
+    display: inline-block;
+    border: 0 solid #fff;
+    float:right;
+    width:24px;
+    height: 28px;
+    background: url(./img_admin/up.jpg) #fff no-repeat left center;
+}
+
+.news .down {
+    margin-top:-25px;
+    display: inline-block;
+    border: 0 solid #fff;
+    float:right;
+    width:26px;
+    height: 28px;
+    background: url(./img_admin/down.jpg) #fff no-repeat left center;
+}
+/*
+*  конец секции [ вывод новостей  ]
+*/
+
+/*
+* начало секции [ Сообщение для пользователя ]
+*/
+#chois_form {
+    display:block;
+    position: absolute;
+    float:left;
+    min-width:100%;
+    min-height:100%;
+    background-color: #fff;
+    top:0;
+    left:0;
+    width: 100%;
+    height:100%;
+    opacity:0.8;
+    FILTER: alpha(opacity=85);
+    z-index:100;
+}
+
+#chois_form a {
+    font-size:10px;
+    margin-top:30px;
+}
+
+.corr_mes  .img {
+    margin-left:1%;   
+    float:left;
+    border: 1px solid #dcdcdc;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;    
+}
+.corr_mes {
+    display:block;
+    margin: 10px auto;
+}
+
+.corr_mes .textarea {
+    display: block;
+    float:right;
+    width:86%;
+}
+
+.corr_mes input[type="text"]{
+    width:86%;
+    text-indent: 7px;
+    font-weight:bolder;
+    float:right;
+    border: 1px solid #dcdcdc;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+ }
+
+.corr_mes input[type="file"]{
+    width:86%;
+    text-indent: 7px;
+    font-weight:bolder;
+    float:right;
+    border: 1px solid #dcdcdc;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+ }
+
+.corr_mes label {
+    font-size: 13px;
+    font-weight: bold;
+    float: left;
+    width: 11%;
+    margin-right: 20px;
+}
+
+.corr_mes input[type="submit"] {
+    display:block;
+    float:left;
+	margin-left: 17%;
+	margin-top: 5px;
+    border: 1px solid #dcdcdc;
+    background: url(./img_admin/button.jpg) #fff no-repeat;
+    color:#fff;
+    font-weight:bold;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+}
+.corr_mes a {
+    display:block;
+    padding:2px;
+    margin-bottom: 20px;
+    font-size:12px;
+    background-color: #b0cb9e;
+    font-weight: bold;
+    color: #000;
+    text-decoration:none;
+}
+/*
+*  конец секции [ Сообщение для пользователя ]
+*/
+
+
+/*
+*  начало секции [ профиль пользователя ]
+*/
+.inf {
+   font-size:12px; 
+   margin: 10px auto;
+   padding: 5px; 
+   display:block;
+   width:90%;
+   height:90%;
+   border: 2px double #f7f7f7;
+   background: url() #fafafa;
+   color:#717171; 
+}
+
+.inf h1{
+    color:#598db4;
+    font-size: 14px;
+    text-align:left;
+    margin-bottom:20px;
+}
+
+.inf form {
+    display:block;
+    margin-top: 10px;
+    width:336px;
+}
+.inf input[type="text"] {
+    display:block;
+    border: 2px solid #e0e0e0;
+    width:200px;
+    float:left;
+    color:#858585;
+}
+
+.inf .title {
+   font-weight: bold;
+   font-size: 110%; 
+}
+
+.inf .text {
+    margin-left: 10px;
+}
+.inf input[type="password"] {
+    display:block;
+    border: 2px solid #e0e0e0;
+    width:200px;
+    float:left;
+    color:#858585;
+}
+
+.inf input[type="submit"] {
+    margin-top: 5px;
+    margin-right: 2px;
+    display:block;
+    float:right;
+    color: #858585;
+    background-color: #fff;
+    border: 2px solid #e0e0e0;
+    cursor:pointer;
+}
+.inf label {
+    display:block;
+    width: 130px;
+    float:left;
+    color:#717171;
+}
+
+.inf form p {
+    display:block;
+    margin-left:120px;
+    color: #ff0000;
+}
+
+.inf form p:before {
+    content: "* ";
+}
+/*
+*  конец секции [ профиль пользователя ]
+*/
+/*
+*  конец секции [ content ]
+*/
+
+/*
+*  начало секции [ вывод дерева каталогов ]
+*/
+.set_root {
+    background-color: #769264;
+    padding-left: 10px;
+    font-weight:bold;
+}
+
+.set_root a {
+    color: #11140e;
+    font-weight:bold;
+    text-decoration:none;
+}
+
+.set_root .last_link {
+   color: #547042; 
+}
+/*
+*  конец секции [ вывод дерева каталогов ]
+*/
+/*
+*  конец [ стили админки ]
+*/

@@ -1,0 +1,157 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+body {
+	background:#5A5A5A;
+	font: 12px/18px Arial, Tahoma, Verdana, sans-serif;
+
+	color:#babdbf;
+}
+a {
+	color: #007eb4;
+	outline: none;
+	text-decoration: underline;
+}
+a:hover {
+	text-decoration: none;
+}
+p {
+	margin: 0 0 18px
+}
+img {
+	border: none;
+}
+input {
+	vertical-align: middle;
+}
+#wrapper_main {
+	background-color:#5a5a5a;
+	width: 1000px;
+	margin: 0 auto;
+	
+}
+
+#green_line{
+	height:55px;
+	background:url(/img/top1.png) no-repeat;
+	background-position: top center;
+	
+}
+
+/* Header
+-----------------------------------------------------------------------------*/
+#header {
+	
+	height: 75px;
+	padding:10px;
+}
+
+
+/* Middle
+-----------------------------------------------------------------------------*/
+#middle {
+	width: 952px;
+	height: 1%;
+	position: relative;
+	background:#131313;
+	margin:0 auto;
+}
+#middle:after {
+	content: '.';
+	display: block;
+	clear: both;
+	visibility: hidden;
+	height: 0;
+}
+#container {
+	width: 100%;
+	float: left;
+	overflow: hidden;
+}
+#content {
+	padding: 10px 7px 10px 230px;
+	min-height:400px;
+	width:722px;
+}
+
+
+/* Sidebar Left
+-----------------------------------------------------------------------------*/
+#sideLeft {
+	float: left;
+	width: 225px;
+	margin-left: -100%;
+	position: relative;
+	background: #131313;
+}
+
+/*menu
+-----------------------------------------------------------------------------*/
+
+
+#menu4 ul{
+	margin-left: 0px;
+	padding-left: 0px;
+    top: 5px;
+	list-style-image: url('/img/list.png');
+	}
+#menu4 {
+    width: 200px;
+	border-right:solid 2px #424242 ;
+	padding-right:10px;
+    margin: 10px;
+        }
+#menu4 li {
+	border-bottom:solid 1px #424242 ;
+}
+
+#menu4 li a {
+         /* height: 26px;*/
+          voice-family: "\"}\"";
+          voice-family: inherit;
+          
+		  text-decoration: none;
+		  
+		  
+        }
+
+#menu4 li a:link, #menu4 li a:visited {
+        color: #ffffff;
+        display: block;
+        font-size:13px;
+
+        background: #131313;
+        padding: 0 0 5px 0;
+        }
+
+#menu4 li a:hover, #menu4 li #current {
+        color: #8d8b8b;
+        background:#131313 ;
+       
+        }
+
+#menu4 li a:active {
+        color: #fff;
+        background: #131313;
+       
+        }
+
+/* Footer
+-----------------------------------------------------------------------------*/
+#footer {
+	margin:0px auto;
+	width:952px;
+	background:url('/img/footer_bg.png') no-repeat;
+	height: 101px;
+	position:relative;
+	
+}
+#img_right {
+	position:absolute;
+	height:122px;
+	width: 248px;
+	background:url("/img/kabel.png");
+	right: 2%;
+	margin-top: -30px;
+}
