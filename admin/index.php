@@ -14,53 +14,10 @@ global $RAYON;
 $RAYON=explode(",", $_SESSION['rayon']);
 
 if($cm=='logout'){
-    $_SESSION['login']='';
-    $_SESSION['access']='';
-    $_SESSION['user']='';
-    $_SESSION['rayon']='';
-    $RAYON='';
-    session_unset();
-    session_destroy();
-    header('Location: /admin/');
+    include_once("controllers/logoutController.php");
 }
 if($cm=='login'){
-$uid=$_POST['name'];
-$passwd=$_POST['pass'];
-
-
-$db = mysql_connect($db_server,$db_user,$db_pass) ;
-mysql_select_db($db_name, $db);
-
-if($passwd!='')
-{
-$rs = mysql_query("SET NAMES utf8");
-$qr = "SELECT access, password, id, rayon FROM users WHERE (login='".$uid."' AND password='".md5($passwd)."')";
-
-$rs = mysql_query($qr);
-$rp='';
-while($row = mysql_fetch_assoc($rs))
-{
-$rp=md5($row['password']);
-$rp=$row['password'];
-
-    $_SESSION['login']=$rp;
-	$_SESSION['access']=$row['access'];
-	$_SESSION['user']=$row['id'];
-	$_SESSION['rayon']=$row['rayon'];
-}
-//die($rp);
-/*if($rp=='') 	echo '
-			<script language="JavaScript">
-				window.location.href = "http://'.$_SERVER["SERVER_NAME"].$_SERVER["PHP_SELF"].'?cmd=loginform"
-			</script>';*/
-mysql_close();
-
-}
-
-if($rp!='')	echo '
-			<script language="JavaScript">
-				window.location.href = "http://'.$_SERVER["SERVER_NAME"].$_SERVER["PHP_SELF"].'"
-			</script>';
+    include_once("controllers/accessController.php");
 
 }
 if((!isset($_SESSION['login']))&&($cm!='loginform'))
@@ -73,96 +30,14 @@ if((!isset($_SESSION['login']))&&($cm!='loginform'))
 	}
 
 if($cm=='update'){
-$id=$_GET['id'];
-$number=$_POST['name'];
-	$name_dir=$_POST['name_director'];
-	$family_dir=$_POST['family_director'];
-	$otch_dir=$_POST['otch_director'];
-	$telephone=$_POST['telephone'];
-	$email=$_POST['email'];
-	$site=$_POST['site'];
-	$address=$_POST['address'];
-	$rayon=(int)$_POST['rayon'];
-	$coord=$_POST['coord'];
-	$pieces = explode(",", $coord);
-	$lat=$pieces[0];
-	$lon=$pieces[1];
-	switch ($rayon)
-	{
-	case 1:$rayon_text='Амур-Нижнеднепровский';break;
-	case 2:$rayon_text='Бабушкинский';break;
-	case 3:$rayon_text='Жовтневый';break;
-	case 4:$rayon_text='Индустриальный';break;
-	case 5:$rayon_text='Кировский';break;
-	case 6:$rayon_text='Красногвардейский';break;
-	case 7:$rayon_text='Ленинский';break;
-	case 8:$rayon_text='Самарский';break;
-	case 9:$rayon_text='Днепропетровский';break;
-	}
-	
-	$kur=explode(":", $_POST[kurator]);
-	$kurator=$kur[0];
-$db = mysql_connect($db_server,$db_user,$db_pass) ;
-mysql_select_db($db_name, $db);
-$rs = mysql_query("SET NAMES utf8");
-$qr = "UPDATE schools SET schools.number='".$number."', schools.name_director='".$name_dir."', schools.family_director='".$family_dir."',
-		schools.otch_director='".$otch_dir."', schools.telephone='".$telephone."', schools.email='".$email."',  schools.site='".$site."',
-		schools.address='".$address."', schools.lat='".$lat."', schools.lon='".$lon."', schools.rayon='".$rayon_text."', schools.kurator='".$kurator."'
-			WHERE schools.id=".$id;
-//echo $qr;
-$rs = mysql_query($qr) or die("Invalid query: " . mysql_error());
-mysql_close();
-
-echo '
-<script language="JavaScript">
-  window.location.href = "http://'.$_SERVER["SERVER_NAME"].$_SERVER["PHP_SELF"].'?cmd=editfolders&rayon='.$rayon.'"
-</script>';
+    include_once("controllers/updateSchoolController.php");
 
 }
 /********************************************************************
 *************обработчик редактирования данных по школам**************
 ********************************************************************/
 if($cm=='updatedatacmd'){
-$id=$_GET['id'];
-$idSchool=$_GET['id_school'];
-$year=$_POST['year'];
-$date_update=$_POST['date_update'];
-$kol_class=$_POST['kol_class'];
-$kol_vip=$_POST['kol_vip'];
-$kol_stud=$_POST['kol_stud'];
-$kol_prepod=$_POST['kol_prepod'];
-$otnosh=$_POST['otnosh'];
-	switch ($otnosh)
-	{
-	case 1:$otnosh_text='Очень плохое';$icon="default#darkorangePoint"; break;
-	case 2:$otnosh_text='Плохое';$icon="default#darkorangePoint";  break;
-	case 3:$otnosh_text='Нормальное';$icon="default#greenPoint";break;
-	case 4:$otnosh_text='Хорошое';$icon="default#greenPoint";break;
-	case 5:$otnosh_text='Очень хорошое';$icon="default#greenPoint"; break;
-	}
-	$db = mysql_connect($db_server,$db_user,$db_pass) ;
-	mysql_select_db($db_name, $db);
-	$rs = mysql_query("SET NAMES utf8");
-	$qr = "UPDATE schools SET schools.icon='".$icon."' WHERE schools.id=".$idSchool." ";
-	$rs = mysql_query($qr);
-	mysql_close();
-
-$db = mysql_connect($db_server,$db_user,$db_pass) ;
-mysql_select_db($db_name, $db);
-$rs = mysql_query("SET NAMES utf8");
-$qr = "UPDATE data SET data.year='".$year."', data.date_update='".$date_update."', data.vipusk_klass='".$kol_class."',
-		data.kol_vip='".$kol_vip."', data.kol_stud='".$kol_stud."', data.kol_prepod='".$kol_prepod."',
-		data.otnosh_univer='".$otnosh_text."'
-			WHERE data.id=".$id;
-
-$rs = mysql_query($qr) or die("Invalid query: " . mysql_error());
-mysql_close();
-
-echo '
-<script language="JavaScript">
-  window.location.href = "http://'.$_SERVER["SERVER_NAME"].$_SERVER["PHP_SELF"].'?cmd=editdata&id='.$idData.'&id_school='.$idSchool.'"
-</script>';
-
+    include_once("controllers/updateDataController.php");
 }
 
 
@@ -172,30 +47,7 @@ echo '
 ********Обработчик добавления пользователя************
 *****************************************************/
 if($cm=='addusercmd'){
-$login=$_POST['login'];
-$passwd=md5($_POST['passwd']);
-$name=$_POST['name'];
-$family=$_POST['family'];
-$email=$_POST['email'];
-$tel=$_POST['tel'];
-$access=$_POST['access'];
-$rayon=$_POST['rayon'];
-
-$db = mysql_connect($db_server,$db_user,$db_pass) ;
-mysql_select_db($db_name, $db);
-$rs = mysql_query("SET NAMES utf8");
-$qr = 'INSERT INTO users (users.login, users.password, users.name, users.family, users.access, users.rayon, users.email, users.telephone)
-				values ("'.$login.'", "'.$passwd.'", "'.$name.'", "'.$family.'", '.$access.', '.$rayon.', "'.$email.'", "'.$tel.'")';
-
-
-
-$rs = mysql_query($qr);
-
-mysql_close();
-echo '
-<script language="JavaScript">
-  window.location.href = "http://'.$_SERVER["SERVER_NAME"].$_SERVER["PHP_SELF"].'"
-</script>';
+    include_once("controllers/addUserController.php");
 }
 
 
@@ -2074,7 +1926,7 @@ echo'
 <input name="address" id="address" class="large_text" type="text" value="" required><br />
 <div id="coord_form">
 <b>Координаты школы:</b> <br />
-<input id="latlongmet" class="input-medium" name="coord" required/><br/>
+<input id="latlongmet" type="hidden" class="input-medium" name="coord" required/><br/>
 </div>';
 echo'</div>';
 /*
@@ -2261,7 +2113,7 @@ echo '
 <input id="address" name="address" class="large_text" type="text" value="'.$address.'" required><br />
 <div id="coord_form">
 <b>Координаты школы:</b> <br />
-<input id="latlongmet" class="input-medium" name="coord" value="'.$coord.'" required/><br/>
+<input id="latlongmet" class="input-medium" type="hidden" name="coord" value="'.$coord.'" required/><br/>
 </div>
 <input class="input_button" type="submit" value="Сохранить"><br>
 
