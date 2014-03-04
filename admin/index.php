@@ -25,7 +25,7 @@ if((!isset($_SESSION['login']))&&($cm!='loginform'))
 
 	echo '
 	<script language="JavaScript">
-		window.location.href = "http://'.$_SERVER["SERVER_NAME"].$_SERVER["PHP_SELF"].'?cmd=loginform"
+		window.location.href = "http://'.$_SERVER["SERVER_NAME"].$_SERVER["PHP_SELF"].'?cmd=loginforvam"
 	</script>';
 	}
 
@@ -95,27 +95,6 @@ echo '
 </script>';
 }
 
-/**********************************обработчик редактирования профиля пользователя ***********************************************/
-if($cm=='uprofile'){
-
-$uid=$_POST['uid'];
-$passwd=$_POST['passwd'];
-$passwd1=$_POST['passwd1'];
-$email=$_POST['email'];
-$c_name=$_POST['c_name'];
-$db = mysql_connect($db_server,$db_user,$db_pass) ;
-mysql_select_db($db_name, $db);
-$att1='';
-if(($passwd==$passwd1)&&($passwd!=''))
-{
-$att1=",passwd='".md5($passwd)."'";
-}
-$rs = mysql_query("SET NAMES utf8");
-$qr = "UPDATE users SET uid='".$uid."'".$att1.",email='".$email."',c_name='".$c_name."' WHERE id=1";
-$rs = mysql_query($qr) or die("Invalid query: " . mysql_error());
-mysql_close();
-if($grp==0)header('Location: /admin/?cmd=profile&done=true');
-}
 
 /***************удаление пользователя****************************/
 if($cm=='deluser')
@@ -495,6 +474,20 @@ function mkPass(len)
  return pass;
 }
 
+</script>
+<script type="text/javascript">
+function loadSchools(){
+var sel = document.getElementById("rayon"); // Получаем наш список
+var nameRayon = sel.options[sel.selectedIndex].text;
+$.ajax({
+  type: "POST",
+  url: "ajax/loadSchools.php",
+  data: "nameRayon="+nameRayon,
+  success: function(data){
+    $("#show_schools").html(data);
+  }
+});
+}
 </script>
 
 
@@ -1072,10 +1065,11 @@ echo '
 	<option selected="selected" value="">Выберите вариант из списка</option>
 	<option value="1">Администратор</option>
 	<option value="2">Модератор</option>
+	<option value="3">Ответственный за школу</option>
 </select><br />
 <b>За какой район отвечает пользователь (для администратора можно не указывать):</b><br />
-<select name="rayon" size="1" class="input_text" >
-	<option selected="selected" value="">Выберите район школы</option>
+<select name="rayon" size="1" id="rayon" class="input_text" onchange="loadSchools()">
+	<option selected="selected" value="0">Выберите район школы</option>
 	<option value="1">Амур-Нижнеднепровский</option>
 	<option value="2">Бабушкинский</option>
 	<option value="3">Жовтневый</option>
@@ -1086,7 +1080,7 @@ echo '
 	<option value="8">Самарский</option>
 	<option value="9">Днепропетровский</option>
 </select><br />
-
+<div id="show_schools"></div>
 <input class="input_button" type="submit" value="Сохранить"><br>
 </form>
 ';
