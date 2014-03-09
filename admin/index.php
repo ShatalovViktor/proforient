@@ -55,61 +55,13 @@ if($cm=='addusercmd'){
 Обработчик изменения данных о пользователе
 ****************************************************/
 if($cm=='updateuser'){
-$idUser=$_GET['id_user'];
-$login=$_POST['login'];
-$passwd=$_POST['passwd'];
-$name=$_POST['name'];
-$family=$_POST['family'];
-$access=$_POST['access'];
-$rayon=$_POST['rayon'];
-$email=$_POST['email'];
-$tel=$_POST['tel'];
-$db = mysql_connect($db_server,$db_user,$db_pass) ;
-mysql_select_db($db_name, $db);
-$rs = mysql_query("SET NAMES utf8");
-$qr = "SELECT * FROM users WHERE id=$idUser";
-$rs = mysql_query($qr);
-if ($rs)
-{
-$row = mysql_fetch_assoc($rs);
-		$pass=$row['password'];
-		$rez=strCmp($passwd,$pass);
-		if ($rez==0) $password='';
-		else {$passwd=md5($passwd);$password=',password="'.$passwd.'"';}
-
-}
-mysql_close();
-
-$db = mysql_connect($db_server,$db_user,$db_pass) ;
-mysql_select_db($db_name, $db);
-$rs = mysql_query("SET NAMES utf8");
-$qr = "UPDATE users SET login='$login' $password,name='$name', family='$family', access=$access, rayon='$rayon',
-					email='$email', telephone='$tel' WHERE id=$idUser";
-$rs = mysql_query($qr) or die("Invalid query: " . mysql_error());
-$_SESSION['rayon']=$rayon;
-//echo $qr;
-mysql_close();
-echo '
-<script language="JavaScript">
-  window.location.href = "http://'.$_SERVER["SERVER_NAME"].$_SERVER["PHP_SELF"].'?cmd=listusers"
-</script>';
+    include_once("controllers/updateUserController.php");
 }
 
 
 /***************удаление пользователя****************************/
 if($cm=='deluser')
-{	$idUser=$_GET['id_user'];
-	$db = mysql_connect($db_server,$db_user,$db_pass) ;
-	mysql_select_db($db_name, $db);
-	$rs = mysql_query("SET NAMES utf8");
-	$qr = "DELETE FROM users WHERE users.id=".$idUser;
-	$rs = mysql_query($qr);
-	mysql_close();
-	//echo $qr;
-	echo '
-	<script language="JavaScript">
-		window.location.href = "http://'.$_SERVER["SERVER_NAME"].$_SERVER["PHP_SELF"].'?cmd=listusers"
-	</script>';
+{
 
 }
 /********************конец удаления пользователя*************************************/
@@ -423,7 +375,6 @@ echo '
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <link rel="stylesheet" type="text/css" href="css/style2.css"/>
 <link rel="stylesheet" type="text/css" href="style.css"/>
-<link href="/admin_style.css" media="screen" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="js/jquery-1.5.2.min.js"></script>
 
 <script type="text/javascript">
@@ -437,58 +388,8 @@ echo '
 	});
 </script>
 
-<script type="text/javascript">
-function mtRand(min, max)
-{
- var range = max - min + 1;
- var n = Math.floor(Math.random() * range) + min;
- return n;
-}
+<script src="js/main.js" type="text/javascript" type="text/javascript"></script>
 
- //генератор паролей
-function showPass()
-{
- var pass=document.getElementById("passwd");
- pass.value=mkPass(mtRand(10, 14));
-}
-
-function mkPass(len)
-{
- var len=len?len:14;
- var pass = "";
- var rnd = 0;
- var c = "";
- for (i = 0; i < len; i++) {
- rnd = mtRand(0, 2); // Латиница или цифры
- if (rnd == 0) {
- c = String.fromCharCode(mtRand(48, 57));
- }
- if (rnd == 1) {
- c = String.fromCharCode(mtRand(65, 90));
- }
- if (rnd == 2) {
- c = String.fromCharCode(mtRand(97, 122));
- }
- pass += c;
- }
- return pass;
-}
-
-</script>
-<script type="text/javascript">
-function loadSchools(){
-var sel = document.getElementById("rayon"); // Получаем наш список
-var nameRayon = sel.options[sel.selectedIndex].text;
-$.ajax({
-  type: "POST",
-  url: "ajax/loadSchools.php",
-  data: "nameRayon="+nameRayon,
-  success: function(data){
-    $("#show_schools").html(data);
-  }
-});
-}
-</script>
 
 
 
@@ -881,115 +782,7 @@ echo '
 **************************************/
 if($cm=='edituser')
 {
-$db = mysql_connect($db_server,$db_user,$db_pass) ;
-mysql_select_db($db_name, $db);
-$rs = mysql_query("SET NAMES utf8");
-$idUser=(int)$_GET['id_user'];
-$qr = "SELECT * FROM users WHERE id=$idUser LIMIT 0,1";
-$rs = mysql_query($qr);
-if($rs)
-{
-$row = mysql_fetch_assoc($rs);
-echo '
-<table width="100%" cedllspacing="0" cellpadding="8px" border="0">
-<tbody>
-<tr>
-<td align="right" colspan="2" style="background-color:#3E5A2A; color:#ffffff;">';
-if ($_SESSION['access']=='1')
-	{
-		echo '<a href="/admin/?cmd=listusers" style="color:white;">Список пользователей</a>&nbsp;&nbsp;&nbsp;';
-
-	}
-
-echo'
-<a href="?cmd=logout" style="color:white;">Выход</a>&nbsp;</td>
-</tr>
-<tr>
-<td colspan="2" style="background-color:#3E5A2A; color:#ffffff;">'.$menu_razdel.'</td>
-</tr>
-<tr>
-<td width="256px" valign="top" style="border-right:solid 1px #ffffff; class="left_menu" rowspan="2">
-<div class="left_menu_head">Основные разделы сайта</div>
-<div class="menu">
-<ul class="left_menu">
-<li><a href="?cmd=editfolders&rayon=1">Амур-Нижнеднепровский </a></li><br/>
-<li><a href="?cmd=editfolders&rayon=2">Бабушкинский </a></li><br/>
-<li><a href="?cmd=editfolders&rayon=3">Жовтневый </a></li><br/>
-<li><a href="?cmd=editfolders&rayon=4">Индустриальный </a></li><br/>
-<li><a href="?cmd=editfolders&rayon=5">Кировский </a></li><br/>
-<li><a href="?cmd=editfolders&rayon=6">Красногвардейский </a></li><br/>
-<li><a href="?cmd=editfolders&rayon=7">Ленинский </a></li><br/>
-<li><a href="?cmd=editfolders&rayon=8">Самарский </a></li><br/>
-</ul>
-</div>
-<td valign="top">
-<div style="padding:6px; background-color:#b0cb9e; width:98%;" ><a href="/admin/?cmd=profile">/ Редактирование профиля /</a></div>
-<br>
-';
-
-echo '
-<form action="/admin/?cmd=updateuser&id_user='.$idUser.'" method="POST">
-<b>Логин пользователя:</b><br>
-<input name="login" type="text" value="'.$row[login].'" class="input_text" required><br>
-<b>Пароль пользователя: (это шифр пароля)</b><br>
-<small>Для смены пароля просто удалите данный шифр и впишите пароль <br/>
-так же для смены пароля можно воспользоваться генератором паролей </small> <br/>
-<input name="passwd" id="passwd" type="text" value="'.$row[password].'" class="input_text" required><br>
-<a href="javascript: showPass();">Придумать хороший пароль</a>
-<br>
-<b>Имя пользователя:</b><br>
-<input name="name" type="text" value="'.$row[name].'" class="input_text" required><br>
-<b>Фамилия пользователя:</b><br>
-<input name="family" type="text" value="'.$row[family].'" class="input_text" required><br>
-<b>e-mail пользователя:</b><br>
-<input name="email" type="text" value="'.$row[email].'" class="input_text" required><br>
-<b>Телефон пользователя:</b><br>
-<input name="tel" type="text" value="'.$row[telephone].'" class="input_text" required><br>
-<b>Уровень доступа пользователя:</b><br>';
-?>
-
-
-
-<select name="access" size="1" class="input_text" required>
-<option <?php if ($row[access]==1) { ?>selected="selected"<?php } ?>value="1">Администратор</option>
-<option <?php if ($row[access]==2) { ?>selected="selected"<?php } ?>value="2">Модератор</option>
-</select>
-<br/>
-<b>За какой район отвечает пользователь (для администратора можно не указывать):</b><br />
-<select name="rayon" size="1" class="input_text" required>
-<option <?php if ($row[rayon]==0) { ?>selected="selected"<?php } ?>value="0">Все</option>
-<option <?php if ($row[rayon]==1) { ?>selected="selected"<?php } ?>value="1">Амур-Нижнеднепровский</option>
-<option <?php if ($row[rayon]==2) { ?>selected="selected"<?php } ?>value="2">Бабушкинский</option>
-<option <?php if ($row[rayon]==3) { ?>selected="selected"<?php } ?>value="3">Жовтневый</option>
-<option <?php if ($row[rayon]==4) { ?>selected="selected"<?php } ?>value="4">Индустриальный</option>
-<option <?php if ($row[rayon]==5) { ?>selected="selected"<?php } ?>value="5">Кировский</option>
-<option <?php if ($row[rayon]==6) { ?>selected="selected"<?php } ?>value="6">Красногвардейский</option>
-<option <?php if ($row[rayon]==7) { ?>selected="selected"<?php } ?>value="7">Ленинский</option>
-<option <?php if ($row[rayon]==8) { ?>selected="selected"<?php } ?>value="8">Самарский</option>
-<option <?php if ($row[rayon]==9) { ?>selected="selected"<?php } ?>value="9">Днепропетровский</option>
-
-
-</select>
-<?php
-echo'
-<br />
-<input class="input_button" type="submit" value="Сохранить"><br>
-</form>
-';
-
-mysql_free_result($rs);
-echo '</tbody>';
-echo '</table>';
-}
-
-mysql_close();
-
-echo '
-</td>
-</tr>
-</tbody>
-</table>
-';
+    include_once("views/updateUserView.php");
 }
 
 
@@ -1061,13 +854,14 @@ echo '
 <b>Телефон пользователя:</b><br>
 <input name="tel" type="text" value="" class="input_text" required><br>
 <b>Уровень доступа пользователя:</b><br>
-<select name="access" size="1" class="input_text" required>
+<select name="access" size="1" id="access" class="input_text" required onchange="loadRayon()">
 	<option selected="selected" value="">Выберите вариант из списка</option>
 	<option value="1">Администратор</option>
 	<option value="2">Модератор</option>
 	<option value="3">Ответственный за школу</option>
 </select><br />
-<b>За какой район отвечает пользователь (для администратора можно не указывать):</b><br />
+<div id="show_rayon" style="display:none">
+<b>За какой район отвечает пользователь:</b><br />
 <select name="rayon" size="1" id="rayon" class="input_text" onchange="loadSchools()">
 	<option selected="selected" value="0">Выберите район школы</option>
 	<option value="1">Амур-Нижнеднепровский</option>
@@ -1080,6 +874,7 @@ echo '
 	<option value="8">Самарский</option>
 	<option value="9">Днепропетровский</option>
 </select><br />
+</div>
 <div id="show_schools"></div>
 <input class="input_button" type="submit" value="Сохранить"><br>
 </form>
