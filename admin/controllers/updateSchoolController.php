@@ -1,6 +1,7 @@
 <?php
 $id=$_GET['id'];
-$number=$_POST['name'];
+$number=addslashes($_POST['name']);
+$short_name=$_POST['short_name'];
 $name_dir=$_POST['name_director'];
 $family_dir=$_POST['family_director'];
 $otch_dir=$_POST['otch_director'];
@@ -31,11 +32,11 @@ $kurator=$kur[0];
 $db = mysql_connect($db_server,$db_user,$db_pass) ;
 mysql_select_db($db_name, $db);
 $rs = mysql_query("SET NAMES utf8");
-$qr = "UPDATE schools SET schools.number='".$number."', schools.name_director='".$name_dir."', schools.family_director='".$family_dir."',
+$qr = "UPDATE schools SET schools.number='".$number."', schools.short_name='".$short_name."', schools.name_director='".$name_dir."', schools.family_director='".$family_dir."',
 		schools.otch_director='".$otch_dir."', schools.telephone='".$telephone."', schools.email='".$email."',  schools.site='".$site."',
 		schools.address='".$address."', schools.lat='".$lat."', schools.lon='".$lon."', schools.rayon='".$rayon_text."', schools.kurator='".$kurator."'
 			WHERE schools.id=".$id;
-//echo $qr;
+
 $rs = mysql_query($qr) or die("Invalid query: " . mysql_error());
 mysql_close();
 

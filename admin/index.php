@@ -62,7 +62,7 @@ if($cm=='updateuser'){
 /***************удаление пользователя****************************/
 if($cm=='deluser')
 {
-
+    include_once("controllers/delUserController.php");
 }
 /********************конец удаления пользователя*************************************/
 
@@ -174,50 +174,7 @@ if($cm=='deldataitem')
 
 if($cm=='addfcmd')
 {
-	$number=$_POST['name'];
-	$name_dir=$_POST['name_director'];
-	$family_dir=$_POST['family_director'];
-	$otch_dir=$_POST['otch_director'];
-	$telephone=$_POST['telephone'];
-	$email=$_POST['email'];
-	$site=$_POST['site'];
-	$address=$_POST['address'];
-	$rayon=$_POST['rayon'];
-	if ((isset($_POST['kutator']))&&($_POST['kurator'])!='')
-				$kurator=$_POST['kurator'];
-	else $kurator=$_SESSION['user'];
-	$coord=$_POST['coord'];
-	$pieces = explode(",", $coord);
-	$lat=$pieces[0];
-	$lon=$pieces[1];
-	switch ($rayon)
-	{
-	case 1:$rayon_text='Амур-Нижнеднепровский';break;
-	case 2:$rayon_text='Бабушкинский';break;
-	case 3:$rayon_text='Жовтневый';break;
-	case 4:$rayon_text='Индустриальный';break;
-	case 5:$rayon_text='Кировский';break;
-	case 6:$rayon_text='Красногвардейский';break;
-	case 7:$rayon_text='Ленинский';break;
-	case 8:$rayon_text='Самарский';break;
-	case 9:$rayon_text='Днепропетровский';break;
-	}
-
-	
-	$db = mysql_connect($db_server,$db_user,$db_pass) ;
-	mysql_select_db($db_name, $db);
-	$rs = mysql_query("SET NAMES utf8");
-	$qr = "INSERT INTO schools (schools.number, schools.name_director, schools.family_director, schools.otch_director, schools.telephone,
-						schools.email, schools.site, schools.address, schools.lat, schools.lon, schools.rayon, schools.kurator, schools.icon)
-				VALUES ('".$number."' ,'".$name_dir."', '".$family_dir."', '".$otch_dir."', '".$telephone."', '".$email."',
-						'".$site."', '".$address."','".$lat."', '".$lon."', '".$rayon_text."', ".$kurator.", 'default#redPoint')";
-	$rs = mysql_query($qr) or die("Invalid query: " . mysql_error());
-	mysql_close();
-	//header('Location: /admin/?cmd=editfolders');
-	echo '
-	<script language="JavaScript">
-		window.location.href = "http://'.$_SERVER["SERVER_NAME"].$_SERVER["PHP_SELF"].'?cmd=editfolders&rayon='.$rayon.'"
-	</script>';
+    include_once("controllers/addSchoolController.php");
 
 }
 /************************************************
@@ -386,6 +343,7 @@ echo '
 		});
 
 	});
+
 </script>
 
 <script src="js/main.js" type="text/javascript" type="text/javascript"></script>
@@ -1489,312 +1447,23 @@ mysql_free_result($rs);
 }
 
 //необходимо
-/**************************************************Добавление раздела***********************************************************/
+/**************************************************Добавление школы***********************************************************/
 if($cm=='addfolder')
 {
-if ($_SESSION['access']=='1')
-	{
-		$db = mysql_connect($db_server,$db_user,$db_pass) ;
-		mysql_select_db($db_name, $db);
-		$rs = mysql_query("SET NAMES utf8");
-		$qr = "SELECT * FROM users ";
-		$rs = mysql_query($qr)  or die(mysql_errno().mysql_error()) ;
-		if($rs)
-			{
-				$inp_kurator='<b>Куратор школы:</b><br /><select name="kurator" size="1" class="input_text">';
-				$inp_kurator.='<option selected="selected" value="">Выберите куратора школы</option>';
-				while($row = mysql_fetch_assoc($rs))
-					{
-						$inp_kurator.='<option value="'.$row["id"].'">'.$row["family"].'&nbsp'.$row["name"].'</option>';
-					}
-				$inp_kurator.='</select><br />';
-			}
-	}
-	else $inp_kurator='<br /><input name="kurator" class="input_text" type="hidden" value"'.$_SESSION["user"].'" ><br />';
-
-
-echo '
-<table width="100%" cedllspacing="0" cellpadding="8px" border="0">
-<tbody>
-<tr>
-<td align="right" colspan="2" style="background-color:#3E5A2A; color:#ffffff;">';
-if ($_SESSION['access']=='1')
-	{
-		echo '<a href="/admin/?cmd=listusers" style="color:white;">Список пользователей</a>&nbsp;&nbsp;&nbsp;';
-
-	}
-echo '
-<a href="?cmd=logout" style="color:white;">Выход</a>&nbsp;</td>
-</tr>
-<tr>
-<td colspan="2" style="background-color:#3E5A2A; color:#ffffff;">'.$menu_razdel.'</td>
-</tr>
-<tr>
-<td width="256px" valign="top" style="border-right:solid 1px #ffffff; class="left_menu">
-
-<div class="left_menu_head">Основные разделы сайта</div>
-<div class="menu">
-<ul class="left_menu">
-<li><a href="?cmd=editfolders&rayon=1">Амур-Нижнеднепровский </a></li><br/>
-<li><a href="?cmd=editfolders&rayon=2">Бабушкинский </a></li><br/>
-<li><a href="?cmd=editfolders&rayon=3">Жовтневый </a></li><br/>
-<li><a href="?cmd=editfolders&rayon=4">Индустриальный </a></li><br/>
-<li><a href="?cmd=editfolders&rayon=5">Кировский </a></li><br/>
-<li><a href="?cmd=editfolders&rayon=6">Красногвардейский </a></li><br/>
-<li><a href="?cmd=editfolders&rayon=7">Ленинский </a></li><br/>
-<li><a href="?cmd=editfolders&rayon=8">Самарский </a></li><br/>
-<li><a href="?cmd=editfolders&rayon=9">Днепропетровск </a></li><br/>
-</ul>
-</div>
-
-<td>
-'.$c_path.'
-<br>
-
-<form action="../admin/?cmd=addfcmd" method="POST">
-<div style="padding:5px; border-bottom:solid 1px #dddddd;">
-<h3>Новая школа:</h3>
-</div>
-<div style="padding:10px; border-bottom:solid 1px #dddddd;">
-<b>Название и номер школы:</b><br />
-<input name="name" class="input_text" type="text" required><br />
-<b>Фамилия директора:</b><br />
-<input name="family_director" class="input_text" type="text" required><br />
-<b>Имя директора:</b><br />
-<input name="name_director" class="input_text" type="text" required><br />
-<b>Отчество директора:</b><br />
-<input name="otch_director" class="input_text" type="text" ><br />
-<b>Телефон школы:</b><br />
-<input name="telephone" class="input_text" type="tel"  required><br />
-<b>Электронный адрес (email) школы:</b><br />
-<input name="email" class="input_text" type="email" ><br />
-<b>Сайт школы:</b><br />
-<input name="site" class="input_text" type="text"><br />
-<b>В каком районе школа:</b><br />
-<select name="rayon" size="1" class="input_text" required>
-	<option selected="selected" value="">Выберите район школы</option>
-	<option value="1">Амур-Нижнеднепровский</option>
-	<option value="2">Бабушкинский</option>
-	<option value="3">Жовтневый</option>
-	<option value="4">Индустриальный</option>
-	<option value="5">Кировский</option>
-	<option value="6">Красногвардейский</option>
-	<option value="7">Ленинский</option>
-	<option value="8">Самарский</option>
-	<option value="9">Днепропетровский</option>
-</select><br />
-
-';
-echo $inp_kurator;
-echo'
-<div id="YMapsID" style="height:400px; width:600px;"></div>
-<b>Адрес школы:</b><br />
-<input name="address" id="address" class="large_text" type="text" value="" required><br />
-<div id="coord_form">
-<b>Координаты школы:</b> <br />
-<input id="latlongmet" type="hidden" class="input-medium" name="coord" required/><br/>
-</div>';
-echo'</div>';
-/*
-<div style="padding:10px; border-bottom:solid 1px #dddddd;">
-<b>SEO:</b><br>
-<b>Title:</b><br>
-<input name="title" class="input_text" type="text"><br>
-<b>Keywoards:</b><br>
-<input name="keywoards" class="input_text" type="text"><br>
-<b>Description:</b><br>
-<input name="description" class="input_text" type="text"><br>
-</div>*/
-echo '
-<div style="padding:10px;">
-<input class="input_button" type="submit" value="Сохранить"><br>
-</div>
-</form>
-
-</td>
-</tr>
-</tbody>
-</table>
-
-';
+    include_once("views/addSchoolView.php");
 }
-/****************************************конец добавления раздела**************************************************************/
+/****************************************конец добавления школы**************************************************************/
 
 
-/******************************************Редактирование раздела********************************************/
+/******************************************Редактирование школы********************************************/
 
 
 if($cm=='editfolderitem')
 {
-$id=$_GET['id'];
-
-
-$db = mysql_connect($db_server,$db_user,$db_pass) ;
-mysql_select_db($db_name, $db);
-$rs = mysql_query("SET NAMES utf8");
-$qr = "SELECT * FROM schools WHERE schools.id=".$id;
-$rs = mysql_query($qr);
-
-if($rs){
-$row = mysql_fetch_assoc($rs);
-$number=$row['number'];
-$name_dir=$row['name_director'];
-$family_dir=$row['family_director'];
-$otch_dir=$row['otch_director'];
-$telephone=$row['telephone'];
-$email=$row['email'];
-$site=$row['site'];
-$address=$row['address'];
-$rayon_text=$row['rayon'];
-$kurator=$row['kurator'];
-$coord=$row['lat'];
-$coord.=','.$row['lon'];
-
-mysql_close();
-}
-if ($_SESSION['access']=='1')
-	{
-		$db = mysql_connect($db_server,$db_user,$db_pass) ;
-		mysql_select_db($db_name, $db);
-		$rs = mysql_query("SET NAMES utf8");
-		$qr = "SELECT * FROM users";
-		$rs = mysql_query($qr)  or die(mysql_errno().mysql_error()) ;
-		if($rs)
-			{
-				$inp_kurator='<br><b>Куратор школы:</b><br /><select name="kurator" size="1" class="input_text">';
-				while($row2 = mysql_fetch_assoc($rs))
-					{
-						$id_user=(int)$row2['id'];
-						if ($kurator == $id_user) $sel='selected';
-							else $sel='';
-						echo '<br/ >';
-						$inp_kurator.='<option '.$sel.' value="'.$row2["id"].'">'.$row2["id"].':'.$row2["family"].'&nbsp'.$row2["name"].'</option>';
-					}
-				$inp_kurator.='</select><br />';
-			}
-	}
-	else $inp_kurator='<br /><input name="kurator" class="input_text" type="hidden" value="'.$_SESSION["user"].'" ><br />';
-	mysql_close();
-switch ($rayon_text)
-	{
-	case 'Амур-Нижнеднепровский':$rayon=1;break;
-	case 'Бабушкинский':$rayon=2;break;
-	case 'Жовтневый':$rayon=3;break;
-	case 'Индустриальный':$rayon=4;break;
-	case 'Кировский':$rayon=5;break;
-	case 'Красногвардейский':$rayon=6;break;
-	case 'Ленинский':$rayon=7;break;
-	case 'Самарский':$rayon=8;break;
-	case 'Днепропетровский':$rayon=9;break;
-	}
-$tt='Редактирование школы';
-echo '
-<table width="100%" cedllspacing="0" cellpadding="8px" border="0">
-<tbody>
-<tr>
-<td align="right" colspan="2" style="background-color:#3E5A2A; color:#ffffff;">';
-if ($_SESSION['access']=='1')
-	{
-		echo '<a href="/admin/?cmd=listusers" style="color:white;">Список пользователей</a>&nbsp;&nbsp;&nbsp;';
-
-	}
-
-echo'
-<a href="?cmd=logout" style="color:white;">Выход</a>&nbsp;</td>
-</tr>
-<tr>
-<td colspan="2" style="background-color:#3E5A2A; color:#ffffff;">'.$menu_razdel.'</td>
-</tr>
-<tr>
-<td width="256px" valign="top" style="border-right:solid 1px #ffffff; class="left_menu">
-
-<div class="left_menu_head">Основные разделы сайта</div>
-<div class="menu">
-<ul class="left_menu">
-<li><a href="?cmd=editfolders&rayon=1">Амур-Нижнеднепровский </a></li><br/>
-<li><a href="?cmd=editfolders&rayon=2">Бабушкинский </a></li><br/>
-<li><a href="?cmd=editfolders&rayon=3">Жовтневый </a></li><br/>
-<li><a href="?cmd=editfolders&rayon=4">Индустриальный </a></li><br/>
-<li><a href="?cmd=editfolders&rayon=5">Кировский </a></li><br/>
-<li><a href="?cmd=editfolders&rayon=6">Красногвардейский </a></li><br/>
-<li><a href="?cmd=editfolders&rayon=7">Ленинский </a></li><br/>
-<li><a href="?cmd=editfolders&rayon=8">Самарский </a></li><br/>
-<li><a href="?cmd=editfolders&rayon=9">Днепропетровский </a></li><br/>
-</ul>
-</div>
-<br/>
-<br/>
-<div class="left_menu_head">Создать внутри текущего блока</div>
-<div class="menu">
-<ul style="list-style-image:url(images/menu_add_razdel.png);">
-<li><a href="http://'.$_SERVER['SERVER_NAME'].$_SERVER['PHP_SELF'].'?cmd=adddata&id='.$id.'">Добавить данные по школе</a><br/></li>
-</ul>
-</td>
-<td>
-'.$c_path.'
-<br>
-
-<form action="?cmd=update&id='.$id.'" method="POST" enctype="multipart/form-data">
-<div style="padding:5px; border-bottom:solid 1px #dddddd;">
-<h3>'.$tt.':</h3>
-</div>
-<b>Название и номер школы:</b><br />
-<input name="name" class="input_text" type="text" value="'.$number.'" required><br />
-<b>Фамилия директора:</b><br />
-<input name="family_director" class="input_text" type="text" value="'.$family_dir.'" required><br />
-<b>Имя директора:</b><br />
-<input name="name_director" class="input_text" type="text" value="'.$name_dir.'" required><br />
-<b>Отчество директора:</b><br />
-<input name="otch_director" class="input_text" type="text" value="'.$otch_dir.'"><br />
-<b>Телефон школы:</b><br />
-<input name="telephone" class="input_text" type="text" value="'.$telephone.'" required><br />
-<b>Электронный адрес (email) школы:</b><br />
-<input name="email" class="input_text" type="email" value="'.$email.'"><br />
-<b>Сайт школы:</b><br />
-<input name="site" class="input_text" type="text" value="'.$site.'"><br />
-
-<b>Район:</b><br />
-<select name="rayon" size="1" class="input_text" required>';
-?>
-<option <?php if ($rayon==1) { ?>selected="selected"<?php } ?>value="1">Амур-Нижнеднепровский</option>
-<option <?php if ($rayon==2) { ?>selected="selected"<?php } ?>value="2">Бабушкинский</option>
-<option <?php if ($rayon==3) { ?>selected="selected"<?php } ?>value="3">Жовтневый</option>
-<option <?php if ($rayon==4) { ?>selected="selected"<?php } ?>value="4">Индустриальный</option>
-<option <?php if ($rayon==5) { ?>selected="selected"<?php } ?>value="5">Кировский</option>
-<option <?php if ($rayon==6) { ?>selected="selected"<?php } ?>value="6">Красногвардейский</option>
-<option <?php if ($rayon==7) { ?>selected="selected"<?php } ?>value="7">Ленинский</option>
-<option <?php if ($rayon==8) { ?>selected="selected"<?php } ?>value="8">Самарский</option>
-<option <?php if ($rayon==8) { ?>selected="selected"<?php } ?>value="9">Днепропетровский</option>
-
-</select>
-
-
-<?php
-echo $inp_kurator;
-echo '
-<br>
-
-<div id="YMapsID" style="height:400px; width:600px;"></div>
-<b>Адрес школы:</b><br />
-<input id="address" name="address" class="large_text" type="text" value="'.$address.'" required><br />
-<div id="coord_form">
-<b>Координаты школы:</b> <br />
-<input id="latlongmet" class="input-medium" type="hidden" name="coord" value="'.$coord.'" required/><br/>
-</div>
-<input class="input_button" type="submit" value="Сохранить"><br>
-
-</form>
-</td>
-</tr>
-</tbody>
-</table>
-';
-
-mysql_close();
-
+    include_once("views/editSchoolView.php");
 }
 
-/******************************************Конец редактирование раздела******************************************************/
+/******************************************Конец редактирование школы******************************************************/
 
 if($cm=='')
 {

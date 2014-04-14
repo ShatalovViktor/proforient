@@ -50,6 +50,7 @@ echo '
             <li><a href="?cmd=editfolders&rayon=6">Красногвардейский </a></li><br/>
             <li><a href="?cmd=editfolders&rayon=7">Ленинский </a></li><br/>
             <li><a href="?cmd=editfolders&rayon=8">Самарский </a></li><br/>
+            <li><a href="?cmd=editfolders&rayon=9">Днепропетровский </a></li><br/>
         </ul>
     </div>
     <td valign="top">

@@ -1,8 +1,11 @@
 function loadSchools(){
+
     var sel = document.getElementById("rayon"); // Получаем наш список
     var nameRayon = sel.options[sel.selectedIndex].text;
+    //alert(nameRayon);
     var sel = document.getElementById("access"); // Получаем наш список
     var valAccess = sel.value;
+
     if (valAccess==3){
         $.ajax({
             type: "POST",

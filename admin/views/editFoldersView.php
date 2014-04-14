@@ -77,12 +77,11 @@ if ((in_array($_GET['rayon'], $RAYON))||($_SESSION['rayon']==0)||($_SESSION['acc
             {
                 $idSchools[]=$rowAccess['id_school'];
             }
-
         }
-        foreach ($idSchools as $key => $idSchool){
-            $qr = "SELECT * FROM schools WHERE (schools.id=$idSchool)";
 
-        }
+            $qr = 'SELECT * FROM schools WHERE (schools.id IN (' . implode(',', array_map('intval', $idSchools)) . '))';
+       // echo $qr;
+
 
     }
     else{

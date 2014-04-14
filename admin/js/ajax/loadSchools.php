@@ -1,7 +1,7 @@
 <?php
 
 if (isset($_POST["nameRayon"])):
-    include("/../../settings.php");
+    include("../../settings.php");
     $nameRayon=htmlspecialchars($_POST["nameRayon"]);
     $db = mysql_connect($db_server,$db_user,$db_pass) ;
     mysql_select_db($db_name, $db);$rs = mysql_query("SET NAMES utf8");

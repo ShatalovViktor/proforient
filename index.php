@@ -16,7 +16,7 @@ include("admin/settings.php");
 
 
 	<script src="http://api-maps.yandex.ru/2.0/?load=package.full&lang=ru-RU" type="text/javascript"></script>
-<script src="http://api-maps.yandex.ru/1.1/index.xml?key=AEFDDlMBAAAAx6kWPgIACpXH1O7FTH8eQpFL9P-wQQQyZaMAAAAAAAAAAACXEV8zrYWDiOU1IuWWPSGUA-2tkg=="
+<script src="http://api-maps.yandex.ru/1.1/index.xml?key=AGybdlIBAAAADzcrAQQA5gedE7XoT9UWKazFFgQVQWF485cAAAAAAAAAAAD3euohBHdP7SVNBMlxPK205sLnrg=="
         type="text/javascript"></script>
 	<script type="text/javascript">
         // Создание обработчика для события window.onLoad
@@ -44,12 +44,12 @@ include("admin/settings.php");
 					while($row = mysql_fetch_assoc($rs))
 					{
 					$descr='<br /><b>Директор:</b>'.$row[family_director].' '.$row[name_director].' '.$row[otch_director].'<br /><b>Телефон:</b>'.$row[telephone].'<br /><b>E-mail:</b>'
-					.$row[email].'<br /><b>Сайт школы:</b>'.$row[site].'<br /><b>Адрес школы:</b>'.$row[address].'<br/><a href=\"?school_id='.$row[id].'\"> Данные по школе </a>';
+					.$row[email].'<br /><b>Сайт школы:</b>'.$row[site].'<br /><b>Адрес школы:</b>'.$row[address].'<br/><a href=\?school_id='.$row[id].'> Данные по школе </a>';
 
 
 
 				?>
-        	createPlacemark(new YMaps.GeoPoint(<?php echo "$row[lon] , $row[lat]";?>), "<?php echo addslashes($row['number']);?>",   "<?php echo addslashes($descr);?>" ,"<?php echo $row['icon'];?>"),
+        	createPlacemark(new YMaps.GeoPoint(<?php echo "$row[lon] , $row[lat]";?>), "<?php echo addslashes($row['short_name']);?>",   "<?php echo addslashes($descr);?>" ,"<?php echo $row['icon'];?>"),
 			<?php
 			 }
 			?>
@@ -65,12 +65,12 @@ include("admin/settings.php");
 					while($row = mysql_fetch_assoc($rs))
 					{
 					$descr='<br /><b>Директор:</b>'.$row[family_director].' '.$row[name_director].' '.$row[otch_director].'<br /><b>Телефон:</b>'.$row[telephone].'<br /><b>E-mail:</b>'
-					.$row[email].'<br /><b>Сайт школы:</b>'.$row[site].'<br /><b>Адрес школы:</b>'.$row[address].'<br/><a href=\"?school_id='.$row[id].'\"> Данные по школе </a>';
+					.$row[email].'<br /><b>Сайт школы:</b>'.$row[site].'<br /><b>Адрес школы:</b>'.$row[address].'<br/><a href=\?school_id='.$row[id].'> Данные по школе </a>';
 
 
 
 				?>
-        	createPlacemark(new YMaps.GeoPoint(<?php echo "$row[lon] , $row[lat]";?>), "<?php echo addslashes($row['number']);?>",   "<?php echo addslashes($descr);?>" ,"<?php echo $row['icon'];?>"),
+        	createPlacemark(new YMaps.GeoPoint(<?php echo "$row[lon] , $row[lat]";?>), "<?php echo addslashes($row['short_name']);?>",   "<?php echo addslashes($descr);?>" ,"<?php echo $row['icon'];?>"),
 			<?php
 			 }
 			?>
@@ -89,12 +89,12 @@ include("admin/settings.php");
 					while($row = mysql_fetch_assoc($rs))
 					{
 					$descr='<br /><b>Директор:</b>'.$row[family_director].' '.$row[name_director].' '.$row[otch_director].'<br /><b>Телефон:</b>'.$row[telephone].'<br /><b>E-mail:</b>'
-					.$row[email].'<br /><b>Сайт школы:</b>'.$row[site].'<br /><b>Адрес школы:</b>'.$row[address].'<br/><a href=\"?school_id='.$row[id].'\"> Данные по школе </a>';
+					.$row[email].'<br /><b>Сайт школы:</b>'.$row[site].'<br /><b>Адрес школы:</b>'.$row[address].'<br/><a href=\?school_id='.$row[id].'> Данные по школе </a>';
 
 
 
 				?>
-        	createPlacemark(new YMaps.GeoPoint(<?php echo "$row[lon] , $row[lat]";?>), "<?php echo addslashes($row['number']);?>",   "<?php echo addslashes($descr);?>" ,"<?php echo $row['icon'];?>"),
+        	createPlacemark(new YMaps.GeoPoint(<?php echo "$row[lon] , $row[lat]";?>), "<?php echo addslashes($row['short_name']);?>",   "<?php echo addslashes($descr);?>" ,"<?php echo $row['icon'];?>"),
 			<?php
 			 }
 			?>
@@ -110,12 +110,12 @@ include("admin/settings.php");
 					while($row = mysql_fetch_assoc($rs))
 					{
 					$descr='<br /><b>Директор:</b>'.$row[family_director].' '.$row[name_director].' '.$row[otch_director].'<br /><b>Телефон:</b>'.$row[telephone].'<br /><b>E-mail:</b>'
-					.$row[email].'<br /><b>Сайт школы:</b>'.$row[site].'<br /><b>Адрес школы:</b>'.$row[address].'<br/><a href=\"?school_id='.$row[id].'\"> Данные по школе </a>';
+					.$row[email].'<br /><b>Сайт школы:</b>'.$row[site].'<br /><b>Адрес школы:</b>'.$row[address].'<br/><a href=\?school_id='.$row[id].'> Данные по школе </a>';
 
 
 
 				?>
-        	createPlacemark(new YMaps.GeoPoint(<?php echo "$row[lon] , $row[lat]";?>), "<?php echo addslashes($row['number']);?>",   "<?php echo addslashes($descr);?>" ,"<?php echo $row['icon'];?>"),
+        	createPlacemark(new YMaps.GeoPoint(<?php echo "$row[lon] , $row[lat]";?>), "<?php echo addslashes($row['short_name']);?>",   "<?php echo addslashes($descr);?>" ,"<?php echo $row['icon'];?>"),
 			<?php
 			 }
 			?>
@@ -131,9 +131,9 @@ include("admin/settings.php");
 					while($row = mysql_fetch_assoc($rs))
 					{
 					$descr='<br /><b>Директор:</b>'.$row[family_director].' '.$row[name_director].' '.$row[otch_director].'<br /><b>Телефон:</b>'.$row[telephone].'<br /><b>E-mail:</b>'
-					.$row[email].'<br /><b>Сайт школы:</b>'.$row[site].'<br /><b>Адрес школы:</b>'.$row[address].'<br/><a href=\"?school_id='.$row[id].'\"> Данные по школе </a>';
+					.$row[email].'<br /><b>Сайт школы:</b>'.$row[site].'<br /><b>Адрес школы:</b>'.$row[address].'<br/><a href=\?school_id='.$row[id].'> Данные по школе </a>';
 				?>
-        	createPlacemark(new YMaps.GeoPoint(<?php echo "$row[lon] , $row[lat]";?>), "<?php echo addslashes($row['number']);?>",   "<?php echo addslashes($descr);?>" ,"<?php echo $row['icon'];?>"),
+        	createPlacemark(new YMaps.GeoPoint(<?php echo "$row[lon] , $row[lat]";?>), "<?php echo addslashes($row['short_name']);?>",   "<?php echo addslashes($descr);?>" ,"<?php echo $row['icon'];?>"),
 			<?php
 			 }
 			?>
@@ -149,12 +149,12 @@ include("admin/settings.php");
 					while($row = mysql_fetch_assoc($rs))
 					{
 					$descr='<br /><b>Директор:</b>'.$row[family_director].' '.$row[name_director].' '.$row[otch_director].'<br /><b>Телефон:</b>'.$row[telephone].'<br /><b>E-mail:</b>'
-					.$row[email].'<br /><b>Сайт школы:</b>'.$row[site].'<br /><b>Адрес школы:</b>'.$row[address].'<br/><a href=\"?school_id='.$row[id].'\"> Данные по школе </a>';
+					.$row[email].'<br /><b>Сайт школы:</b>'.$row[site].'<br /><b>Адрес школы:</b>'.$row[address].'<br/><a href=\?school_id='.$row[id].'> Данные по школе </a>';
 
 
 
 				?>
-        	createPlacemark(new YMaps.GeoPoint(<?php echo "$row[lon] , $row[lat]";?>), "<?php echo addslashes($row['number']);?>",   "<?php echo addslashes($descr);?>" ,"<?php echo $row['icon'];?>"),
+        	createPlacemark(new YMaps.GeoPoint(<?php echo "$row[lon] , $row[lat]";?>), "<?php echo addslashes($row['short_name']);?>",   "<?php echo addslashes($descr);?>" ,"<?php echo $row['icon'];?>"),
 			<?php
 			 }
 			?>
@@ -170,12 +170,12 @@ include("admin/settings.php");
 					while($row = mysql_fetch_assoc($rs))
 					{
 					$descr='<br /><b>Директор:</b>'.$row[family_director].' '.$row[name_director].' '.$row[otch_director].'<br /><b>Телефон:</b>'.$row[telephone].'<br /><b>E-mail:</b>'
-					.$row[email].'<br /><b>Сайт школы:</b>'.$row[site].'<br /><b>Адрес школы:</b>'.$row[address].'<br/><a href=\"?school_id='.$row[id].'\"> Данные по школе </a>';
+					.$row[email].'<br /><b>Сайт школы:</b>'.$row[site].'<br /><b>Адрес школы:</b>'.$row[address].'<br/><a href=\?school_id='.$row[id].'> Данные по школе </a>';
 
 
 
 				?>
-        	createPlacemark(new YMaps.GeoPoint(<?php echo "$row[lon] , $row[lat]";?>), "<?php echo addslashes($row['number']);?>",   "<?php echo addslashes($descr);?>" ,"<?php echo $row['icon'];?>"),
+        	createPlacemark(new YMaps.GeoPoint(<?php echo "$row[lon] , $row[lat]";?>), "<?php echo addslashes($row['short_name']);?>",   "<?php echo addslashes($descr);?>" ,"<?php echo $row['icon'];?>"),
 			<?php
 			 }
 			?>
@@ -192,12 +192,12 @@ include("admin/settings.php");
 					while($row = mysql_fetch_assoc($rs))
 					{
 					$descr='<br /><b>Директор:</b>'.$row[family_director].' '.$row[name_director].' '.$row[otch_director].'<br /><b>Телефон:</b>'.$row[telephone].'<br /><b>E-mail:</b>'
-					.$row[email].'<br /><b>Сайт школы:</b>'.$row[site].'<br /><b>Адрес школы:</b>'.$row[address].'<br/><a href=\"?school_id='.$row[id].'\"> Данные по школе </a>';
+					.$row[email].'<br /><b>Сайт школы:</b>'.$row[site].'<br /><b>Адрес школы:</b>'.$row[address].'<br/><a href=\?school_id='.$row[id].'> Данные по школе </a>';
 
 
 
 				?>
-        	createPlacemark(new YMaps.GeoPoint(<?php echo "$row[lon] , $row[lat]";?>), "<?php echo addslashes($row['number']);?>",   "<?php echo addslashes($descr);?>" ,"<?php echo $row['icon'];?>"),
+        	createPlacemark(new YMaps.GeoPoint(<?php echo "$row[lon] , $row[lat]";?>), "<?php echo addslashes($row['short_name']);?>",   "<?php echo addslashes($descr);?>" ,"<?php echo $row['icon'];?>"),
 			<?php
 			 }
 			?>
@@ -213,12 +213,12 @@ include("admin/settings.php");
 					while($row = mysql_fetch_assoc($rs))
 					{
 					$descr='<br /><b>Директор:</b>'.$row[family_director].' '.$row[name_director].' '.$row[otch_director].'<br /><b>Телефон:</b>'.$row[telephone].'<br /><b>E-mail:</b>'
-					.$row[email].'<br /><b>Сайт школы:</b>'.$row[site].'<br /><b>Адрес школы:</b>'.$row[address].'<br/><a href=\"?school_id='.$row[id].'\"> Данные по школе </a>';
+					.$row[email].'<br /><b>Сайт школы:</b>'.$row[site].'<br /><b>Адрес школы:</b>'.$row[address].'<br/><a href=\?school_id='.$row[id].'> Данные по школе </a>';
 
 
 
 				?>
-        	createPlacemark(new YMaps.GeoPoint(<?php echo "$row[lon] , $row[lat]";?>), "<?php echo addslashes($row['number']);?>",   "<?php echo addslashes($descr);?>" ,"<?php echo $row['icon'];?>"),
+        	createPlacemark(new YMaps.GeoPoint(<?php echo "$row[lon] , $row[lat]";?>), "<?php echo addslashes($row['short_name']);?>",   "<?php echo addslashes($descr);?>" ,"<?php echo $row['icon'];?>"),
 			<?php
 			 }
 			?>
@@ -315,9 +315,14 @@ include("admin/settings.php");
     <div id="welcome">
 
 	<?php
+
 	if (isset($_GET['school_id']))
 	{
+
 		$idSchool=$_GET['school_id'];
+        $db = mysql_connect($db_server,$db_user,$db_pass) ;
+        mysql_select_db($db_name, $db);
+        $rs = mysql_query("SET NAMES utf8");
 		$qr_data = "SELECT * FROM data WHERE (data.id_school=".$idSchool.")";
 		$rs_data = mysql_query($qr_data)  or die(mysql_errno().mysql_error()) ;
 		$i=1;
@@ -367,13 +372,13 @@ include("admin/settings.php");
 					}
 					echo '</table>';
 				}
-				else 'На вібранную дату данных по абитуриентам не найдено';
+				else 'На выбранную дату данных по абитуриентам не найдено';
 				echo '</div><br/>';
 				$i++;
 			}
 			
 		}
-		else		echo '<span style="color:#f00">Нет данных по школе</span>';
+		if ($i==1)		echo '<span style="color:#f00">Нет данных по школе</span>';
 
 
 		
